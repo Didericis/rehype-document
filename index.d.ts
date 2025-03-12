@@ -76,6 +76,10 @@ export interface Options {
    * `file.data.meta.title` (`rehype-infer-title-meta`), which are preferred.
    */
   title?: string | null | undefined
+  /**
+   * Adds the given properties to the body tag (optional).
+   */
+  body?: Readonly<Properties>
 }
 
 // Add custom data supported when `rehype-document` is added.

@@ -24,6 +24,7 @@
   * [Example: CSS](#example-css)
   * [Example: JS](#example-js)
   * [Example: metadata and links](#example-metadata-and-links)
+  * [Example: body properties](#example-body-properties)
 * [Types](#types)
 * [Compatibility](#compatibility)
 * [Security](#security)
@@ -174,6 +175,8 @@ Configuration (TypeScript type).
   with `file.data.matter.title` ([`vfile-matter`][vfile-matter]) and
   `file.data.meta.title`
   ([`rehype-infer-title-meta`][rehype-infer-title-meta]), which are preferred
+* `body` (`Properties`, optional)
+  — add the given properties to `<body>`
 
 ## Example
 
@@ -326,6 +329,43 @@ Yields:
 <link href="/icon.svg" rel="icon" type="image/svg+xml">
 </head>
 <body>
+</body>
+</html>
+```
+
+### Example: body properties
+
+This example shows how to add properties to `<body>`
+
+```js
+import rehypeDocument from 'rehype-document'
+import rehypeParse from 'rehype-parse'
+import rehypeStringify from 'rehype-stringify'
+import {unified} from 'unified'
+
+const file = await unified()
+  .use(rehypeParse, {fragment: true})
+  .use(rehypeDocument, {
+    body: {
+      className: "modern-theme"
+    }
+  })
+  .use(rehypeStringify)
+  .process('')
+
+console.log(String(file))
+```
+
+Yields:
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+</head>
+<body class="modern-theme">
 </body>
 </html>
 ```
